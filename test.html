@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>Test Interpret API</h2>
+<textarea id="text" rows="3" cols="60">I want to fly from Berlin to Rome on May 10 and return on May 15</textarea><br><br>
+<button onclick="send()">Send</button>
+<pre id="output"></pre>
+
+<script>
+  async function send() {
+    const response = await fetch("http://127.0.0.1:5000/interpret", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text: document.getElementById("text").value })
+    });
+    const data = await response.json();
+    document.getElementById("output").innerText = data.result;
+  }
+</script>
+</body>
+</html>

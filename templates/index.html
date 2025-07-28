@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sernior Vital - Version Booking - Beta(0.0.1)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.10.2/lottie.min.js"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body onload="initRecognition()">
+  <div class="container">
+	<div class="avatar speaking" id="avatarContainer">
+  <img id="assistantAvatar" src="https://cdn-icons-png.flaticon.com/512/4140/4140047.png" alt="Assistant Avatar">
+  <p><strong>Ava</strong><br><small>Your SeniorVital assistant</small></p>
+</div>
+
+    <div class="chat-panel">
+      <h1>Flight Assistant</h1>
+      <div id="chatBox"></div>
+      <button onclick="toggleListening()">🎙️ Let's discuss / Stop</button>
+    </div>
+  </div>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
