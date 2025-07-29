@@ -12,6 +12,11 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 @app.route("/")
 def index():
     return render_template("index.html")
+	
+@app.route("/show-key")
+def show_key():
+    return f"D_ID_API_KEY={D_ID_API_KEY}"
+
 
 @app.route("/chat", methods=["POST"])
 def chat():
