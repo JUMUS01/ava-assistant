@@ -39,8 +39,9 @@ h1 {
 
 #chatBox {
   flex: 1;
-  height: 300px;
-  overflow-y: auto;
+  height: 350px;           /* Fixed height */
+  max-height: 350px;       /* Prevent overflow */
+  overflow-y: auto;        /* Enable scrolling */
   padding: 12px;
   background: #fafafa;
   border: 1px solid #cde3d2;
@@ -49,6 +50,7 @@ h1 {
   font-size: 1.05em;
   line-height: 1.6;
 }
+
 
 #chatBox strong {
   color: #2E7D32;
