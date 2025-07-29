@@ -4,25 +4,32 @@
   <meta charset="UTF-8" />
   <title>Senior Vital - Version Booking - Beta(0.0.1)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- ? Lottie for animated avatar -->
+  <!-- Lottie for animated avatar -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.2/lottie.min.js"></script>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body onload="initRecognition()">
-<div class="container">
-  <div class="chat-panel">
-    <h1>Ava - Your Personal Assistant</h1>
-<div class="button-container">
-  <button onclick="startListening()">Speak</button>
-  <button onclick="stopListening()" class="stop-btn">Stop</button>
-</div>
+  <div class="container">
 
-  <div class="avatar" id="avatarContainer">
-    <img id="assistantAvatar" src="{{ url_for('static', filename='avatar.png') }}" alt="Ava">
-    <p><strong>Ava</strong><br><small>Your Assistant</small></p>
+    <!-- ? Chat Panel (Left) -->
+    <div class="chat-panel">
+      <h1>Ava - Your Personal Assistant</h1>
+
+      <div id="chatBox"></div>
+
+      <div class="button-container">
+        <button onclick="startListening()">?? Speak</button>
+        <button onclick="stopListening()" class="stop-btn">?? Stop</button>
+      </div>
+    </div>
+
+    <!-- ? Avatar (Right) -->
+    <div class="avatar" id="avatarContainer">
+      <img id="assistantAvatar" src="{{ url_for('static', filename='Ava_Avatar.png') }}" alt="Ava">
+      <p><strong>Ava</strong><br><small>Your Assistant</small></p>
+    </div>
+
   </div>
-</div>
-
 
   <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
