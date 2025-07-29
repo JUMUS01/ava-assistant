@@ -81,7 +81,7 @@ async function playTalkingAvatar(text) {
     });
 
     const data = await response.json();
-    console.log("?? Backend /generate-avatar response:", data);
+    console.log("Avatar API Response:", data); 
 
     if (data.id) {
         const videoUrl = `https://studio.d-id.com/player/${data.id}`;
