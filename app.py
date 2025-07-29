@@ -62,9 +62,10 @@ def generate_avatar():
 
         res = requests.post("https://api.d-id.com/talks", json=payload, headers=headers)
 
-		print("DEBUG D-ID Full Response:", res.text)   # Log it to your terminal
+        print("DEBUG D-ID Full Response:", res.text)  # ? Correct indentation (4 spaces)
 
         return jsonify(res.json())
+
 
     except Exception as e:
         print("❌ Flask error:", e)  # ✅ Print the Python error
