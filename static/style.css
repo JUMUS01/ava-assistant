@@ -108,3 +108,19 @@ button:hover {
     height: 180px;
   }
 }
+
+.button-container {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+button.stop-btn {
+  background: #c62828; /* Red button for Stop */
+}
+
+button.stop-btn:hover {
+  background: #8e0000;
+}
+
