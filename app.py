@@ -60,25 +60,25 @@ def generate_avatar():
             "source_url": "https://create-images-results.d-id.com/DefaultPresenters/Noelle_f/image.jpeg"
         }
 
+        # ? Use Basic Auth instead of Bearer
+        import base64
+        auth_string = base64.b64encode(f"{D_ID_API_KEY}:".encode()).decode()
+
         headers = {
-            "Authorization": f"Bearer {D_ID_API_KEY}",
+            "Authorization": f"Basic {auth_string}",
             "Content-Type": "application/json"
         }
 
-        # ? Log the key to a file
-        with open("debug_key.log", "w") as f:
-            f.write(f"D_ID_API_KEY={D_ID_API_KEY}\n")
-
         res = requests.post("https://api.d-id.com/talks", json=payload, headers=headers)
 
-        print("DEBUG D-ID Full Response:", res.text)
+        print("DEBUG D-ID Response:", res.status_code, res.text)
 
         return jsonify(res.json())
 
     except Exception as e:
-        print("Flask error:", e)  # Print the Python error
+        print("? Flask error:", e)
         return jsonify({"error": str(e)}), 500
-	
+
 	
 
 if __name__ == "__main__":
