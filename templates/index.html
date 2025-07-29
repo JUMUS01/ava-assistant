@@ -4,21 +4,22 @@
   <meta charset="UTF-8" />
   <title>Senior Vital - Version Booking - Beta(0.0.1)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.10.2/lottie.min.js"></script>
+  <!-- ? Lottie for animated avatar -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.2/lottie.min.js"></script>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body onload="initRecognition()">
   <div class="container">
-    <div class="avatar speaking" id="avatarContainer">
-      <!-- Replace static image with dynamic iframe -->
-      <iframe id="avatarFrame" width="240" height="320" allow="autoplay; fullscreen"></iframe>
-      <p><strong>Ava</strong><br><small>Your SeniorVital assistant</small></p>
+    <div class="avatar" id="avatarContainer">
+      <!-- ? Lottie Avatar -->
+      <div id="lottieAvatar" style="width: 240px; height: 240px;"></div>
+      <p><strong>Ava</strong><br><small>Your Senior Vital assistant</small></p>
     </div>
 
     <div class="chat-panel">
       <h1>Ava Your Personal Assistant</h1>
       <div id="chatBox"></div>
-      <button onclick="toggleListening()">??? Let's discuss / Stop</button>
+      <button onclick="toggleListening()">Let's discuss / Stop</button>
     </div>
   </div>
 

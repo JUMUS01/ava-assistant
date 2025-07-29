@@ -2,7 +2,6 @@ from flask import Flask, request, jsonify, session, render_template
 from flask_cors import CORS
 from openai import OpenAI
 import os
-import requests
 
 app = Flask(__name__)
 CORS(app)
@@ -12,11 +11,6 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 @app.route("/")
 def index():
     return render_template("index.html")
-	
-@app.route("/show-key")
-def show_key():
-    return f"D_ID_API_KEY={D_ID_API_KEY}"
-
 
 @app.route("/chat", methods=["POST"])
 def chat():
@@ -40,54 +34,6 @@ def chat():
 
     return jsonify({"reply": assistant_reply})
 
-D_ID_API_KEY = os.getenv("D_ID_API_KEY")
-
-@app.route("/generate-avatar", methods=["POST"])
-def generate_avatar():
-    try:
-        data = request.json
-        reply_text = data.get("text")
-
-        payload = {
-            "script": {
-                "type": "text",
-                "input": reply_text,
-                "provider": {
-                    "type": "google",
-                    "voice_id": "en-US-Wavenet-F"
-                }
-            },
-            "source_url": "https://create-images-results.d-id.com/DefaultPresenters/Noelle_f/image.jpeg"
-        }
-
-        # ? Use Basic Auth via requests
-        res = requests.post(
-            "https://api.d-id.com/talks",
-            json=payload,
-            auth=(D_ID_API_KEY, ""),  # username=key, password=empty
-            headers={"Content-Type": "application/json"}
-        )
-
-        print("?? DEBUG STATUS:", res.status_code)
-        print("?? DEBUG RAW RESPONSE:", res.text)
-
-        # ? Try parsing as JSON
-        try:
-            return jsonify(res.json())
-        except Exception:
-            return jsonify({"error": res.text}), 500
-
-    except Exception as e:
-        print("? Flask error:", e)
-        return jsonify({"error": str(e)}), 500
-
-
-
-
-	
-
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
-
-
