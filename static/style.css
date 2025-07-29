@@ -2,121 +2,109 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: #ffffff;
+  background: #F1F8F6; /* Light neutral green background */
   color: #333;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  padding: 40px 20px;
+  align-items: center;
   height: 100vh;
-  box-sizing: border-box;
 }
 
 .container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 500px;
-}
-
-.avatar {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-#lottieAvatar {
-  width: 240px;   /* ?? Larger avatar */
-  height: 240px;
-  margin: 0 auto;
-}
-
-.avatar p {
-  margin-top: 10px;
-  font-size: 1.2em;
-  color: #4a7c20;
-  font-weight: bold;
+  flex-direction: row; /* Chat left, Avatar right */
+  gap: 40px;
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .chat-panel {
-  width: 100%;
-  max-width: 600px;
-  background: #f4fdf1;
-  border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.05);
+  width: 400px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
 }
 
 h1 {
   font-size: 1.8em;
-  margin-bottom: 10px;
-  color: #7ec850;
+  margin-bottom: 15px;
+  color: #2E7D32; /* Professional dark green */
   text-align: center;
 }
 
 #chatBox {
-  width: 100%;
-  max-height: 400px;
+  flex: 1;
+  height: 300px;
   overflow-y: auto;
-  padding: 14px;
-  background: #ffffff;
-  border: 1px solid #cceab0;
+  padding: 12px;
+  background: #fafafa;
+  border: 1px solid #cde3d2;
   border-radius: 8px;
   margin-bottom: 20px;
-  font-size: 1.1em;
+  font-size: 1.05em;
   line-height: 1.6;
 }
 
-#chatBox p {
-  margin: 8px 0;
-}
-
 #chatBox strong {
-  color: #7ec850;
+  color: #2E7D32;
 }
 
 button {
-  padding: 14px 24px;
-  font-size: 18px;
+  padding: 12px 18px;
+  font-size: 16px;
   border: none;
-  background: #bfff00;
-  color: #333;
-  border-radius: 8px;
+  background: #2E7D32; /* Dark green button */
+  color: white;
+  border-radius: 6px;
   cursor: pointer;
   transition: background 0.2s;
 }
 
 button:hover {
-  background: #a8e063;
+  background: #1B5E20; /* Even darker on hover */
+}
+
+.avatar {
+  text-align: center;
+}
+
+.avatar img {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.avatar img.speaking {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #4CAF50, 0 0 40px #2E7D32; /* Darker glow */
+}
+
+.avatar p {
+  margin-top: 10px;
+  font-size: 1.2em;
+  color: #2E7D32;
 }
 
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
     align-items: center;
+    gap: 20px;
   }
 
   .chat-panel {
     width: 90%;
   }
 
-  #lottieAvatar {
-    width: 200px;
-    height: 200px;
+  .avatar img {
+    width: 180px;
+    height: 180px;
   }
-}
-.avatar img {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
-
-.avatar img.speaking {
-  transform: scale(1.05);
-  box-shadow: 0 0 25px #a8e063, 0 0 40px #bfff00;
 }
