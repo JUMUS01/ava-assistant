@@ -40,26 +40,22 @@ function toggleListening() {
 }
 
 function speakText(text, callback) {
+    const avatar = document.getElementById("assistantAvatar");
     window.speechSynthesis.cancel();
 
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = "en-US";
 
-    utterance.onstart = () => {
-        if (avatarAnimation) avatarAnimation.play(); // ? Start avatar animation
-    };
-
+    utterance.onstart = () => avatar.classList.add("speaking");
     utterance.onend = () => {
-        if (avatarAnimation) avatarAnimation.stop(); // ? Stop avatar animation
+        avatar.classList.remove("speaking");
         if (callback) callback();
     };
-
-    utterance.onerror = () => {
-        if (avatarAnimation) avatarAnimation.stop();
-    };
+    utterance.onerror = () => avatar.classList.remove("speaking");
 
     window.speechSynthesis.speak(utterance);
 }
+
 
 function sendToAssistant(text) {
     console.log("?? Sending text to backend:", text);

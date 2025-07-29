@@ -108,3 +108,15 @@ button:hover {
     height: 200px;
   }
 }
+.avatar img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.avatar img.speaking {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px #a8e063, 0 0 40px #bfff00;
+}
