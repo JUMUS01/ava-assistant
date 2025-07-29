@@ -60,7 +60,6 @@ def generate_avatar():
             "source_url": "https://create-images-results.d-id.com/DefaultPresenters/Noelle_f/image.jpeg"
         }
 
-        # ? Use Basic Auth instead of Bearer
         import base64
         auth_string = base64.b64encode(f"{D_ID_API_KEY}:".encode()).decode()
 
@@ -71,13 +70,19 @@ def generate_avatar():
 
         res = requests.post("https://api.d-id.com/talks", json=payload, headers=headers)
 
-        print("DEBUG D-ID Response:", res.status_code, res.text)
+        print("?? DEBUG STATUS:", res.status_code)
+        print("?? DEBUG RAW RESPONSE:", res.text)  # ? Print raw response
 
-        return jsonify(res.json())
+        # ? Check if response is JSON
+        try:
+            return jsonify(res.json())
+        except Exception:
+            return jsonify({"error": res.text}), 500
 
     except Exception as e:
         print("? Flask error:", e)
         return jsonify({"error": str(e)}), 500
+
 
 	
 
