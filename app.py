@@ -59,17 +59,17 @@ def generate_avatar():
             "Authorization": f"Bearer {D_ID_API_KEY}",
             "Content-Type": "application/json"
         }
-		        print("DEBUG D_ID_API_KEY:", D_ID_API_KEY)  # ? Check if key is loaded
+
+        print("DEBUG D_ID_API_KEY:", D_ID_API_KEY)  # ? Correctly indented
 
         res = requests.post("https://api.d-id.com/talks", json=payload, headers=headers)
 
-        print("DEBUG D-ID Full Response:", res.text)  # ? Correct indentation (4 spaces)
+        print("DEBUG D-ID Full Response:", res.text)
 
         return jsonify(res.json())
 
-
     except Exception as e:
-        print("❌ Flask error:", e)  # ✅ Print the Python error
+        print("Flask error:", e)  # Print the Python error
         return jsonify({"error": str(e)}), 500
 	
 	
