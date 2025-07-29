@@ -72,7 +72,8 @@ function addMessage(sender, text) {
 }
 
 async function playTalkingAvatar(text) {
-    console.log("?? Generating talking avatar for:", text);
+    alert("?? playTalkingAvatar called for: " + text); // Temporary popup
+	console.log("?? Generating talking avatar for:", text);
 
     const response = await fetch("/generate-avatar", {
         method: "POST",
