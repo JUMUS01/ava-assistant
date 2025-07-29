@@ -52,7 +52,7 @@ def generate_avatar():
                     "voice_id": "en-US-Wavenet-F"
                 }
             },
-            "source_url": "https://i.ibb.co/yYzvxFK/avatar-base.png"
+            "source_url": "https://create-images-results.d-id.com/DefaultPresenters/Noelle_f/image.jpeg"
         }
 
         headers = {
