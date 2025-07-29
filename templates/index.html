@@ -9,27 +9,28 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body onload="initRecognition()">
-  <div class="container">
+<div class="container">
 
-    <!-- ? Chat Panel (Left) -->
-    <div class="chat-panel">
-      <h1>Ava - Your Personal Assistant</h1>
-
-      <div id="chatBox"></div>
-
-      <div class="button-container">
-        <button onclick="startListening()">Speak</button>
-        <button onclick="stopListening()" class="stop-btn">Stop</button>
-      </div>
-    </div>
-
-    <!-- ? Avatar (Right) -->
-    <div class="avatar" id="avatarContainer">
-      <img id="assistantAvatar" src="{{ url_for('static', filename='Ava_Avatar.png') }}" alt="Ava">
-      <p><strong>Ava</strong><br><small>Your Assistant</small></p>
-    </div>
-
+  <!-- ? Avatar (LEFT) -->
+  <div class="avatar" id="avatarContainer">
+    <img id="assistantAvatar" src="{{ url_for('static', filename='Ava_Avatar.png') }}" alt="Ava">
+    <p><strong>Ava</strong><br><small>Your Assistant</small></p>
   </div>
+
+  <!-- ? Chat Panel (RIGHT) -->
+  <div class="chat-panel">
+    <h1>Ava - Your Personal Assistant</h1>
+
+    <div id="chatBox"></div>
+
+    <div class="button-container">
+      <button onclick="startListening()">Speak</button>
+      <button onclick="stopListening()" class="stop-btn">Stop</button>
+    </div>
+  </div>
+
+</div>
+
 
   <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
