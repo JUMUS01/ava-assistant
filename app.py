@@ -60,20 +60,17 @@ def generate_avatar():
             "source_url": "https://create-images-results.d-id.com/DefaultPresenters/Noelle_f/image.jpeg"
         }
 
-        import base64
-        auth_string = base64.b64encode(f"{D_ID_API_KEY}:".encode()).decode()
-
-        headers = {
-            "Authorization": f"Basic {auth_string}",
-            "Content-Type": "application/json"
-        }
-
-        res = requests.post("https://api.d-id.com/talks", json=payload, headers=headers)
+        # ? Use requests built-in Basic Auth
+        res = requests.post(
+            "https://api.d-id.com/talks",
+            json=payload,
+            auth=(D_ID_API_KEY, ""),  # ? Basic Auth (username=key, password empty)
+            headers={"Content-Type": "application/json"}
+        )
 
         print("?? DEBUG STATUS:", res.status_code)
-        print("?? DEBUG RAW RESPONSE:", res.text)  # ? Print raw response
+        print("?? DEBUG RAW RESPONSE:", res.text)
 
-        # ? Check if response is JSON
         try:
             return jsonify(res.json())
         except Exception:
@@ -82,6 +79,7 @@ def generate_avatar():
     except Exception as e:
         print("? Flask error:", e)
         return jsonify({"error": str(e)}), 500
+
 
 
 	
