@@ -60,9 +60,14 @@ def generate_avatar():
             "Content-Type": "application/json"
         }
 
-        print("DEBUG D_ID_API_KEY:", D_ID_API_KEY)  #Correctly indented
+        # ? Log the key to a file
+        with open("debug_key.log", "w") as f:
+            f.write(f"D_ID_API_KEY={D_ID_API_KEY}\n")
+
         res = requests.post("https://api.d-id.com/talks", json=payload, headers=headers)
+
         print("DEBUG D-ID Full Response:", res.text)
+
         return jsonify(res.json())
 
     except Exception as e:
