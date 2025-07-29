@@ -27,26 +27,25 @@ function toggleListening() {
 }
 
 function speakText(text, callback) {
-  const avatar = document.getElementById("avatarContainer");
-  avatar.classList.add("speaking");
+    const avatar = document.getElementById("avatarContainer");
+    avatar.classList.add("speaking");
 
-  window.speechSynthesis.cancel();
+    window.speechSynthesis.cancel();
 
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = "en-US";
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "en-US";
 
-  utterance.onend = () => {
-    avatar.classList.remove("speaking");
-    if (callback) callback();
-  };
+    utterance.onend = () => {
+        avatar.classList.remove("speaking");
+        if (callback) callback();
+    };
 
-  utterance.onerror = () => {
-    avatar.classList.remove("speaking");
-  };
+    utterance.onerror = () => {
+        avatar.classList.remove("speaking");
+    };
 
-  window.speechSynthesis.speak(utterance);
+    window.speechSynthesis.speak(utterance);
 }
-
 
 function sendToAssistant(text) {
     fetch("/chat", {
@@ -58,10 +57,9 @@ function sendToAssistant(text) {
     .then(data => {
         addMessage("Assistant", data.reply);
         speakText(data.reply, () => {
-            // Auto-resume listening after response finishes
-            toggleListening();
+            toggleListening(); // Auto-resume listening
         });
-		playTalkingAvatar(data.reply); // ← Add this line
+        playTalkingAvatar(data.reply); // Call avatar generation
     });
 }
 
@@ -73,29 +71,22 @@ function addMessage(sender, text) {
     chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-const D_ID_API_KEY = "bXVzaWFsX2p1bGllbkB5YWhvby5mcg:tvS2n_7t6fxYbz0zXd4EU"; // paste your actual API key here
-const AVATAR_IMAGE_URL = "https://i.ibb.co/yYzvxFK/avatar-base.png"; // or your own hosted image
-
 async function playTalkingAvatar(text) {
-  console.log("🧠 Calling playTalkingAvatar with text:", text);
+    console.log("?? Generating talking avatar for:", text);
 
-  const response = await fetch("/generate-avatar", {
-    method: "POST",
-    headers: {
-      "Authorization": `Bearer ${D_ID_API_KEY}`,
-	  "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ text })
-  });
+    const response = await fetch("/generate-avatar", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text })
+    });
 
-  const data = await response.json();
-  console.log("🎥 Backend /generate-avatar response:", data);
+    const data = await response.json();
+    console.log("?? Backend /generate-avatar response:", data);
 
-  if (data.id) {
-    const videoUrl = `https://studio.d-id.com/player/${data.id}`;
-    document.getElementById("avatarFrame").src = videoUrl;
-  } else {
-    console.error("D-ID backend error:", data);
-  }
+    if (data.id) {
+        const videoUrl = `https://studio.d-id.com/player/${data.id}`;
+        document.getElementById("avatarFrame").src = videoUrl;
+    } else {
+        console.error("? D-ID error:", data);
+    }
 }
-
