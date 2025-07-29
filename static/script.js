@@ -82,22 +82,37 @@ function addMessage(sender, text) {
 }
 
 async function playTalkingAvatar(text) {
-    alert("?? playTalkingAvatar called for: " + text); // Temporary popup
-	console.log("?? Generating talking avatar for:", text);
+    console.log("?? Sending text to backend for avatar:", text);
 
-    const response = await fetch("/generate-avatar", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text })
-    });
+    try {
+        const response = await fetch("/generate-avatar", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ text })
+        });
 
-    const data = await response.json();
-    console.log("Avatar API Response:", data); 
+        const data = await response.json();
+        console.log("?? Avatar API Response:", data);
 
-    if (data.id) {
-        const videoUrl = `https://studio.d-id.com/player/${data.id}`;
-        document.getElementById("avatarFrame").src = videoUrl;
-    } else {
-        console.error("? D-ID error:", data);
+        if (data.id) {
+            const videoUrl = `https://studio.d-id.com/player/${data.id}`;
+            document.getElementById("avatarFrame").src = videoUrl;
+        } else {
+            console.error("? Avatar error:", data);
+
+            // Show error on the page
+            const chatBox = document.getElementById("chatBox");
+            const msg = document.createElement("p");
+            msg.innerHTML = `<strong>?? Error:</strong> ${data.error || "Unknown error"}`;
+            chatBox.appendChild(msg);
+        }
+    } catch (err) {
+        console.error("? Fetch failed:", err);
+
+        const chatBox = document.getElementById("chatBox");
+        const msg = document.createElement("p");
+        msg.innerHTML = `<strong>?? Fetch Error:</strong> ${err}`;
+        chatBox.appendChild(msg);
     }
 }
+
