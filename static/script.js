@@ -48,6 +48,8 @@ function speakText(text, callback) {
 }
 
 function sendToAssistant(text) {
+    console.log("?? Sending text to backend:", text);
+
     fetch("/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -55,13 +57,21 @@ function sendToAssistant(text) {
     })
     .then(res => res.json())
     .then(data => {
+        console.log("? Assistant reply:", data);
+
         addMessage("Assistant", data.reply);
         speakText(data.reply, () => {
             toggleListening(); // Auto-resume listening
         });
+
+        console.log("?? Calling playTalkingAvatar with:", data.reply);
         playTalkingAvatar(data.reply); // Call avatar generation
+    })
+    .catch(err => {
+        console.error("? Error in sendToAssistant:", err);
     });
 }
+
 
 function addMessage(sender, text) {
     const chatBox = document.getElementById("chatBox");
