@@ -59,7 +59,7 @@ def generate_avatar():
             "Authorization": f"Bearer {D_ID_API_KEY}",
             "Content-Type": "application/json"
         }
-
+		print("DEBUG D_ID_API_KEY:", D_ID_API_KEY)
         res = requests.post("https://api.d-id.com/talks", json=payload, headers=headers)
 
         print("DEBUG D-ID Full Response:", res.text)  # ? Correct indentation (4 spaces)
