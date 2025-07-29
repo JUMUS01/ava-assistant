@@ -62,7 +62,7 @@ def generate_avatar():
 
         res = requests.post("https://api.d-id.com/talks", json=payload, headers=headers)
 
-        print("🧠 D-ID response:", res.status_code, res.text)  # ✅ Log it to your terminal
+		print("DEBUG D-ID Full Response:", res.text)   # Log it to your terminal
 
         return jsonify(res.json())
 
