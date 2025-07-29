@@ -60,12 +60,9 @@ def generate_avatar():
             "Content-Type": "application/json"
         }
 
-        print("DEBUG D_ID_API_KEY:", D_ID_API_KEY)  # ? Correctly indented
-
+        print("DEBUG D_ID_API_KEY:", D_ID_API_KEY)  #Correctly indented
         res = requests.post("https://api.d-id.com/talks", json=payload, headers=headers)
-
         print("DEBUG D-ID Full Response:", res.text)
-
         return jsonify(res.json())
 
     except Exception as e:
