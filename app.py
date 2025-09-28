@@ -8,6 +8,29 @@ CORS(app)
 app.secret_key = os.getenv("FLASK_SECRET_KEY")
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
+from datetime import timedelta
+
+# (Put these near your app config)
+app.config["SESSION_TYPE"] = "filesystem"   # server-side sessions
+app.config["SESSION_PERMANENT"] = False
+app.permanent_session_lifetime = timedelta(hours=6)
+
+@app.route("/health")
+def health():
+    # Bump this version string whenever you deploy to confirm the right code is live
+    return {"status": "ok", "version": "ava-ctx-v3"}
+
+@app.route("/debug-session")
+def debug_session():
+    convo = session.get("conversation", [])
+    return {
+        "messages_in_session": len(convo),
+        "has_system_prompt": bool(convo and convo[0].get("role") == "system"),
+        "preview_last_3": [m.get("role","?")+": "+m.get("content","")[:80] for m in convo[-3:]]
+    }
+
+
+
 @app.route("/")
 def index():
     return render_template("index.html")
