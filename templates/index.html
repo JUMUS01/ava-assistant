@@ -23,10 +23,16 @@
 
     <div id="chatBox"></div>
 
-    <div class="button-container">
-      <button onclick="startListening()">Speak</button>
-      <button onclick="stopListening()" class="stop-btn">Stop</button>
-    </div>
+		<div class="button-container">
+		  <button onclick="startListening()">🎤 Speak</button>
+		  <button onclick="stopListening()" class="stop-btn">🛑 Stop</button>
+
+		  <label style="display:flex;align-items:center;gap:6px;margin-left:8px;font-size:14px;">
+			<input type="checkbox" id="autoListenToggle" checked />
+			Auto-listen
+		  </label>
+		</div>
+
   </div>
 
 </div>
